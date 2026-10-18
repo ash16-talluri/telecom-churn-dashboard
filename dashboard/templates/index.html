@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Telecom AI Dashboard | Pre-Launch Market Test</title>
+<link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+    <h5 class="tag">PRE-LAUNCH MARKET TEST</h5>
+    
+
+    <h1>
+        Announce the plan.<br>
+        Watch the reaction.<br>
+        Decide before you lose users.
+    </h1>
+
+    <p class="subtitle">
+        Every announced telecom plan collects customer feedback.
+        Analyze churn prediction and retention before launching
+        the plan.
+    </p>
+
+        <div class="plans" id="plansContainer">
+
+        <div class="card">
+            <span class="status green">FEEDBACK OPEN</span>
+
+            <h2>5G Unlimited - Prepaid</h2>
+
+            <p>Unlimited 5G data for prepaid users.</p>
+
+            <div class="info">
+                <p><strong>Price:</strong> ₹239/month</p>
+                <p><strong>Users:</strong> Prepaid</p>
+                <p><strong>Feedback:</strong> 420 responses</p>
+                <p><strong>Predicted Churn:</strong> 26.9%</p>
+            </div>
+
+            <button onclick="window.location.href='/dashboard'">
+    Review Plan →
+</button>
+        </div>
+
+        <div class="card">
+            <span class="status blue">UNDER REVIEW</span>
+
+            <h2>Family Postpaid 4-in-1</h2>
+
+            <p>Four SIMs with shared data.</p>
+
+            <div class="info">
+                <p><strong>Price:</strong> ₹999/month</p>
+                <p><strong>Users:</strong> Postpaid</p>
+                <p><strong>Feedback:</strong> 210 responses</p>
+                <p><strong>Predicted Churn:</strong> 32.6%</p>
+            </div>
+
+            <button onclick="window.location.href='/dashboard'">
+    Review Plan →
+</button>
+        </div>
+
+        <div class="card">
+            <span class="status orange">ROLLED OUT</span>
+
+            <h2>5G For Everyone</h2>
+
+            <p>5G access for every customer.</p>
+
+            <div class="info">
+                <p><strong>Price:</strong> ₹349/month</p>
+                <p><strong>Users:</strong> All Users</p>
+                <p><strong>Feedback:</strong> 980 responses</p>
+                <p><strong>Predicted Churn:</strong> 18%</p>
+            </div>
+
+            <button onclick="window.location.href='/dashboard'">
+    Review Plan →
+</button>
+        </div>
+
+    </div>
+
+</div>
+<section class="new-plan-section">
+
+
+<h2>🚀 Create New Telecom Plan</h2>
+
+<p class="plan-text">
+Fill in the details below to predict how customers may respond before launching a new telecom plan.
+</p>
+
+<div class="plan-form">
+
+<div class="form-group">
+<label>Plan Name</label>
+<input type="text"
+id="planName"
+placeholder="Example: Super 5G Max">
+</div>
+
+<div class="form-group">
+<label>Plan Type</label>
+    <select id="planType">
+<option>Prepaid</option>
+<option>Postpaid</option>
+<option>Family</option>
+<option>Student</option>
+<option>Business</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Price (₹)</label>
+<input
+type="number"
+id="price"
+placeholder="499">
+</div>
+
+<div class="form-group">
+<label>Data Limit</label>
+<input
+type="text"
+id="dataLimit"
+placeholder="2GB/Day">
+</div>
+
+<div class="form-group">
+<label>Validity</label>
+<input
+type="text"
+id="validity"
+placeholder="28 Days">
+</div>
+
+<div class="form-group">
+<label>Target Customers</label>
+<input
+type="text"
+id="targetCustomers"
+placeholder="Students, Families...">
+</div>
+
+<div class="form-group full">
+<label>Special Benefits</label>
+<textarea
+id="benefits"
+placeholder="Unlimited 5G, OTT Subscription, Extra Data...">
+</textarea>
+</div>
+
+<button id="predictBtn">
+🤖 Predict Market Response
+</button>
+
+</div>
+
+</section>
+
+    <footer>
+
+Telecom Customer Churn Prediction Dashboard
+
+© 2026 Ashrita
+
+</footer>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Customer Details</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+</head>
+
+<body>
+
+<div class="customer-container">
+
+    <h1>👤 Customer Details</h1>
+    <div class="overview-card">
+
+    <h2>👤 Customer Overview</h2>
+
+    <div class="overview-grid">
+
+        <div>
+            <strong>Customer ID</strong><br>
+            {{ customer["CustomerID"] }}
+        </div>
+
+        <div>
+            <strong>Gender</strong><br>
+            {{ customer["Gender"] }}
+        </div>
+
+        <div>
+            <strong>City</strong><br>
+            {{ customer["City"] }}
+        </div>
+
+        <div>
+            <strong>State</strong><br>
+            {{ customer["State"] }}
+        </div>
+
+        <div>
+            <strong>Country</strong><br>
+            {{ customer["Country"] }}
+        </div>
+
+        <div>
+            <strong>Zip Code</strong><br>
+            {{ customer["Zip Code"] }}
+        </div>
+
+        <div>
+            <strong>Tenure</strong><br>
+            {{ customer["Tenure Months"] }} Months
+        </div>
+
+        <div>
+            <strong>Partner</strong><br>
+            {{ customer["Partner"] }}
+        </div>
+
+    </div>
+
+</div>
+<div class="overview-card">
+
+    <h2>📞 Telecom Services</h2>
+
+    <div class="overview-grid">
+
+        <div>
+            <strong>Phone Service</strong><br>
+            {{ customer["Phone Service"] }}
+        </div>
+
+        <div>
+            <strong>Multiple Lines</strong><br>
+            {{ customer["Multiple Lines"] }}
+        </div>
+
+        <div>
+            <strong>Internet Service</strong><br>
+            {{ customer["Internet Service"] }}
+        </div>
+
+        <div>
+            <strong>Online Security</strong><br>
+            {{ customer["Online Security"] }}
+        </div>
+
+        <div>
+            <strong>Online Backup</strong><br>
+            {{ customer["Online Backup"] }}
+        </div>
+
+        <div>
+            <strong>Device Protection</strong><br>
+            {{ customer["Device Protection"] }}
+        </div>
+
+        <div>
+            <strong>Tech Support</strong><br>
+            {{ customer["Tech Support"] }}
+        </div>
+
+        <div>
+            <strong>Streaming TV</strong><br>
+            {{ customer["Streaming TV"] }}
+        </div>
+
+        <div>
+            <strong>Streaming Movies</strong><br>
+            {{ customer["Streaming Movies"] }}
+        </div>
+
+    </div>
+
+</div>
+<div class="overview-card">
+
+    <h2>💳 Billing Information</h2>
+
+    <div class="overview-grid">
+
+        <div>
+            <strong>Contract</strong><br>
+            {{ customer["Contract"] }}
+        </div>
+
+        <div>
+            <strong>Monthly Charges</strong><br>
+            ₹{{ customer["Monthly Charges"] }}
+        </div>
+
+        <div>
+            <strong>Total Charges</strong><br>
+            ₹{{ customer["Total Charges"] }}
+        </div>
+
+        <div>
+            <strong>Payment Method</strong><br>
+            {{ customer["Payment Method"] }}
+        </div>
+
+        <div>
+            <strong>Paperless Billing</strong><br>
+            {{ customer["Paperless Billing"] }}
+        </div>
+
+        <div>
+            <strong>Tenure</strong><br>
+            {{ customer["Tenure Months"] }} Months
+        </div>
+
+    </div>
+
+</div>
+<div class="overview-card">
+
+<h2>🤖 AI Prediction</h2>
+
+<div class="overview-grid">
+
+<div>
+<strong>Churn Status</strong><br>
+
+{% if customer["Churn Label"]=="Yes" %}
+<span style="color:red;font-weight:bold;">
+🔴 Likely to Churn
+</span>
+{% else %}
+<span style="color:lime;font-weight:bold;">
+🟢 Will Stay
+</span>
+{% endif %}
+
+</div>
+
+<div>
+<strong>Churn Score</strong><br>
+{{ customer["Churn Score"] }}
+</div>
+
+<div>
+<strong>Customer Lifetime Value</strong><br>
+₹{{ customer["CLTV"] }}
+</div>
+
+<div>
+<strong>Reason</strong><br>
+{{ customer["Churn Reason"] }}
+</div>
+
+</div>
+
+</div>
+   
+
+
+        <div>
+            <strong>Reason</strong><br>
+            {{ customer["Churn Reason"] }}
+        </div>
+
+        <div class="overview-card">
+
+<h2>🤖 AI Recommendation</h2>
+
+{% if customer["Churn Label"]=="Yes" %}
+
+<p style="color:#ff5555;font-size:18px;">
+⚠ High Risk Customer
+</p>
+
+<ul>
+<li>Offer 20% Discount</li>
+<li>Provide Free OTT Subscription</li>
+<li>Assign Priority Customer Support</li>
+<li>Suggest Better Contract Plan</li>
+</ul>
+
+{% else %}
+
+<p style="color:lightgreen;font-size:18px;">
+✅ Low Risk Customer
+</p>
+
+<ul>
+<li>Offer Loyalty Rewards</li>
+<li>Recommend Premium Plans</li>
+<li>Send Thank You Offers</li>
+</ul>
+
+{% endif %}
+
+</div>
+<div class="overview-card">
+
+<h2>📱 Subscription Details</h2>
+
+<div class="overview-grid">
+
+<div>
+<strong>Contract</strong><br>
+{{ customer["Contract"] }}
+</div>
+
+<div>
+<strong>Internet Service</strong><br>
+{{ customer["Internet Service"] }}
+</div>
+
+<div>
+<strong>Phone Service</strong><br>
+{{ customer["Phone Service"] }}
+</div>
+
+<div>
+<strong>Multiple Lines</strong><br>
+{{ customer["Multiple Lines"] }}
+</div>
+
+<div>
+<strong>Monthly Charges</strong><br>
+₹{{ customer["Monthly Charges"] }}
+</div>
+
+<div>
+<strong>Total Charges</strong><br>
+₹{{ customer["Total Charges"] }}
+</div>
+
+</div>
+
+</div>
+<div class="overview-card">
+
+<h2>💳 Billing Information</h2>
+
+<div class="overview-grid">
+
+<div>
+<strong>Payment Method</strong><br>
+{{ customer["Payment Method"] }}
+</div>
+
+<div>
+<strong>Paperless Billing</strong><br>
+{{ customer["Paperless Billing"] }}
+</div>
+
+<div>
+<strong>Monthly Charges</strong><br>
+₹{{ customer["Monthly Charges"] }}
+</div>
+
+<div>
+<strong>Total Charges</strong><br>
+₹{{ customer["Total Charges"] }}
+</div>
+
+</div>
+
+</div>
+
+<div class="overview-card">
+
+<h2>📊 Churn Analysis</h2>
+
+<div class="overview-grid">
+
+<div>
+<strong>Churn Status</strong><br>
+{{ customer["Churn Label"] }}
+</div>
+
+<div>
+<strong>Churn Score</strong><br>
+{{ customer["Churn Score"] }}
+</div>
+
+<div>
+<strong>Customer Lifetime Value</strong><br>
+₹{{ customer["CLTV"] }}
+</div>
+
+<div>
+<strong>Churn Reason</strong><br>
+{{ customer["Churn Reason"] }}
+</div>
+
+</div>
+
+</div>
+<div class="overview-card">
+
+<h2>🛠 Customer Services</h2>
+
+<div class="overview-grid">
+
+<div>
+<strong>Tech Support</strong><br>
+{{ customer["Tech Support"] }}
+</div>
+
+<div>
+<strong>Online Security</strong><br>
+{{ customer["Online Security"] }}
+</div>
+
+<div>
+<strong>Online Backup</strong><br>
+{{ customer["Online Backup"] }}
+</div>
+
+<div>
+<strong>Device Protection</strong><br>
+{{ customer["Device Protection"] }}
+</div>
+
+<div>
+<strong>Streaming TV</strong><br>
+{{ customer["Streaming TV"] }}
+</div>
+
+<div>
+<strong>Streaming Movies</strong><br>
+{{ customer["Streaming Movies"] }}
+</div>
+
+</div>
+
+</div>
+<div class="overview-card">
+
+<h2>📍 Customer Location</h2>
+
+<div id="map"></div>
+
+</div>
+    <br>
+
+    <a href="/dashboard">
+        <button class="back-btn">⬅ Back to Dashboard</button>
+    </a>
+
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+
+var map = L.map('map').setView(
+    [{{ customer["Latitude"] }}, {{ customer["Longitude"] }}],
+    11
+);
+
+L.tileLayer(
+'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+{
+maxZoom:19
+}
+).addTo(map);
+
+L.marker([
+{{ customer["Latitude"] }},
+{{ customer["Longitude"] }}
+]).addTo(map)
+.bindPopup("{{ customer['City'] }}")
+.openPopup();
+
+</script>
+</body>
+
+</html>

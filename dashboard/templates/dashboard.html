@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telecom Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+        <h2>📡 Telecom AI</h2>
+        <ul>
+    <li onclick="showSection('dashboardSection')">Dashboard</li>
+    <li onclick="showSection('analyticsSection')">Analytics</li>
+    <li onclick="showSection('predictionSection')">Predictions</li>
+    <li onclick="showSection('feedbackPageSection')">Feedback</li>
+    <li onclick="showSection('settingsSection')">Settings</li>
+</ul>
+
+
+    </div>
+
+    <!-- Main -->
+    <div class="main">
+        <section id="dashboardSection">
+
+        <h1>Customer Churn Dashboard</h1>
+
+        <!-- Cards -->
+        <div class="cards">
+
+            <div class="card">
+                <h3>Total Customers</h3>
+                <h2 >{{total_customers}}</h2>
+            </div>
+
+            <div class="card">
+                <h3>Churn Customers</h3>
+                <h2>{{churn_customers}}</h2>
+            </div>
+
+            <div class="card">
+                <h3>Retention</h3>
+                <h2>{{retention_rate}}%</h2>
+            </div>
+
+            <div class="card">
+                <h3>Revenue</h3>
+                <h2>₹{{revenue}}</h2>
+            </div>
+
+        </div>
+        <h2>🤖 AI Insights</h2>
+<div class="cards">
+
+    <div class="card">
+        <h3>Highest CLTV</h3>
+        <h2>₹{{ highest_cltv }}</h2>
+    </div>
+
+    <div class="card">
+        <h3>Average Churn Score</h3>
+        <h2>{{ average_churn_score }}</h2>
+    </div>
+
+    <div class="card">
+        <h3>Most Used Contract</h3>
+        <h2>{{ most_used_contract }}</h2>
+    </div>
+
+    <div class="card">
+        <h3>Most Used Payment</h3>
+        <h2>{{ most_used_payment }}</h2>
+    </div>
+
+</div>
+<h2>📊 Business Statistics</h2>
+
+<div class="cards">
+
+    <div class="card">
+        <h3>👥 Senior Citizens</h3>
+        <h2>{{ senior_citizens }}</h2>
+    </div>
+
+    <div class="card">
+        <h3>👨‍👩‍👧 Partners</h3>
+        <h2>{{ partners }}</h2>
+    </div>
+
+    <div class="card">
+        <h3>🌐 Internet Users</h3>
+        <h2>{{ internet_users }}</h2>
+    </div>
+
+    <div class="card">
+        <h3>📞 Phone Service</h3>
+        <h2>{{ phone_users }}</h2>
+    </div>
+
+    <div class="card">
+        <h3>💰 Avg Monthly</h3>
+        <h2>₹{{ avg_monthly }}</h2>
+    </div>
+
+    <div class="card">
+        <h3>📅 Avg Tenure</h3>
+        <h2>{{ avg_tenure }} Months</h2>
+    </div>
+
+</div>
+
+        <!-- Charts -->
+        <div class="charts">
+
+            <div class="chart-box">
+                <h2>Customer Distribution</h2>
+                <canvas id="pieChart"></canvas>
+            </div>
+
+            <div class="chart-box">
+                <h2>Monthly Churn Trend</h2>
+                <canvas id="barChart"></canvas>
+            </div>
+
+        </div>
+
+<div class="chart-box">
+
+    <h2>Top Churn Reasons</h2>
+
+    <canvas id="reasonChart"></canvas>
+
+</div>
+<div class="overview-card">
+
+<h2>📌 Dashboard Insights</h2>
+
+<div class="insight-box">
+
+<p>📈 <b>Retention Rate:</b> {{ retention_rate }}% of customers continue using the service.</p>
+
+<p>📄 <b>Most Popular Contract:</b> {{ most_used_contract }}</p>
+
+<p>💳 <b>Most Used Payment Method:</b> {{ most_used_payment }}</p>
+
+<p>💰 <b>Highest Customer Lifetime Value:</b> ₹{{ highest_cltv }}</p>
+
+<p>📊 <b>Average Churn Score:</b> {{ average_churn_score }}</p>
+
+</div>
+
+</div>
+        <!-- Customer Feedback -->
+
+        <div class="feedback-section">
+
+            <h2>Customer Feedback</h2>
+
+            <div class="feedback-card">
+                😊 "Network quality has improved after the new plan."
+            </div>
+
+            <div class="feedback-card">
+                😐 "The data pack is good, but the price is high."
+            </div>
+
+            <div class="feedback-card">
+                😞 "Poor signal in rural areas."
+            </div>
+
+        </div>
+    </section>
+<section id="analyticsSection" style="display:none;">
+
+<h1>Analytics</h1>
+
+<input
+type="text"
+id="searchCustomer"
+placeholder="Search Customer ID">
+
+<br><br>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Customer ID</th>
+<th>Contract</th>
+<th>Monthly Charges</th>
+<th>Churn Status</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for customer in customer_details %}
+<tr>
+    <td>
+        <a href="/customer/{{ customer['CustomerID'] }}">
+            {{ customer["CustomerID"] }}
+        </a>
+    </td>
+
+    <td>{{ customer["Contract"] }}</td>
+    <td>₹{{ customer["Monthly Charges"] }}</td>
+    <td>{{ customer["Churn Label"] }}</td>
+</tr>
+
+
+{% endfor %}
+
+</tbody>
+
+
+
+</table>
+</section>
+
+<section id="predictionSection" style="display:none;">
+<h1>Customer Churn Predictions</h1>
+<div class="cards">
+
+    <div class="card">
+        <h3>🔴 High Risk</h3>
+        <h2>{{ high_risk }}</h2>
+    </div>
+
+    <div class="card">
+        <h3>🟢 Low Risk</h3>
+        <h2>{{ low_risk }}</h2>
+    </div>
+
+    <div class="card">
+        <h3>📈 Churn Rate</h3>
+        <h2>{{ churn_rate }}%</h2>
+    </div>
+
+</div>
+
+<br>
+<table>
+<thead>
+
+    <tr>
+<th>Customer ID</th>
+<th>Monthly Charges</th>
+<th>Contract</th>
+<th>Prediction</th>
+<th>Risk</th>
+<th>Recommendation</th>
+</tr>
+</thead>
+<tbody>
+{% for customer in customer_details %}
+<tr>
+    
+<td>
+    <a href="/customer/{{ customer['CustomerID'] }}">
+        {{ customer["CustomerID"] }}
+    </a>
+</td>
+<td>₹{{ customer["Monthly Charges"] }}</td>
+<td>{{ customer["Contract"] }}</td>
+<td>
+{% if customer["Churn Label"] == "Yes" %}
+<span style="color:red;font-weight:bold;">Likely to Churn</span>
+{% else %}
+<span style="color:lightgreen;font-weight:bold;">Will Stay</span>
+{% endif %}
+</td>
+<td>
+{% if customer["Churn Label"] == "Yes" %}
+<span style="color:red;font-weight:bold;">🔴 High Risk</span>
+{% else %}
+<span style="color:green;font-weight:bold;">🟢 Low Risk</span>
+{% endif %}
+</td>
+
+<td>
+{% if customer["Churn Label"] == "Yes" %}
+Offer 20% Discount + Free OTT
+{% else %}
+No Action Needed
+{% endif %}
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</section>
+<section id="feedbackPageSection" style="display:none;">
+
+<h1>Customer Feedback</h1>
+
+<form id="feedbackForm">
+
+<label>Customer ID</label><br>
+<input type="text" placeholder="Enter Customer ID"><br><br>
+
+<label>Feedback Type</label><br>
+
+<select>
+<option>Network Issue</option>
+<option>Billing</option>
+<option>Customer Support</option>
+<option>Plan Suggestion</option>
+<option>Other</option>
+</select>
+
+<br><br>
+
+<label>Feedback</label><br>
+
+<textarea rows="5" cols="50"
+placeholder="Write your feedback here..."></textarea>
+
+<br><br>
+
+<label>Rating</label><br>
+
+<select>
+<option>⭐</option>
+<option>⭐⭐</option>
+<option>⭐⭐⭐</option>
+<option>⭐⭐⭐⭐</option>
+<option>⭐⭐⭐⭐⭐</option>
+</select>
+
+<br><br>
+
+<button type="submit">Submit Feedback</button>
+<p id="successMessage"
+style="display:none;color:lime;font-weight:bold;margin-top:15px;">
+✅ Feedback submitted successfully!
+</p>
+
+</form>
+
+</section>
+<section id="settingsSection" style="display:none;">
+
+<h1>⚙️ Settings</h1>
+
+<div class="settings-grid">
+
+<div class="setting-card">
+<h3>🌙 Theme</h3>
+
+<label class="switch">
+<input type="checkbox" id="darkModeToggle">
+<span class="slider"></span>
+</label>
+
+<p>Enable Dark Mode</p>
+
+</div>
+
+<div class="setting-card">
+
+<h3>📊 Dashboard</h3>
+
+<p>Customers Per Page</p>
+
+<select>
+<option>25</option>
+<option selected>50</option>
+<option>100</option>
+</select>
+
+</div>
+
+<div class="setting-card">
+
+<h3>📥 Export</h3>
+
+<p>Download Customer Dataset</p>
+
+<a href="/download">
+    <button id="downloadBtn">Download CSV</button>
+</a>
+
+</div>
+
+<div class="setting-card">
+
+
+<h3>🏠 Navigation</h3>
+
+<p>Return to the Home Page</p>
+
+<button id="homeBtn">🏠 Back to Home</button>
+
+</div>
+
+<div class="setting-card full-width">
+
+<h3>ℹ️ Project Information</h3>
+
+<p><b>Project:</b> Telecom Customer Churn Dashboard</p>
+
+<p><b>Version:</b> 1.0</p>
+
+<p><b>Developer:</b> Ashrita</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+    </div>
+
+</div>
+<script>
+const retainedCustomers = {{ total_customers - churn_customers }};
+const churnCustomers = {{ churn_customers }};
+const contractData = {{ contract_data | tojson }};
+const reasonLabels = {{ reason_labels | tojson }};
+const reasonValues = {{ reason_values | tojson }};
+</script>
+
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+<footer>
+
+<p>📡 Telecom Customer Churn Dashboard</p>
+
+<p>Developed by Ashrita © 2026</p>
+
+</footer>
+
+</body>
+</html>
